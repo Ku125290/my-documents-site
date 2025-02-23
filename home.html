@@ -84,11 +84,7 @@
     <div class="container">
         <h1>Document Viewer</h1>
         <p>Click on a document to preview or download: <strong>Kusum Yadav</strong></p>
-        <ul class="document-list">
-            <li><button onclick="showPreview('document1.pdf')"><i class="fas fa-file-pdf icon"></i>View PDF</button></li>
-            <li><button onclick="showPreview('https://docs.google.com/gview?url=YOUR_SITE_URL/presentation.pptx&embedded=true')"><i class="fas fa-file-powerpoint icon"></i>View PowerPoint</button></li>
-            <li><button onclick="showPreview('https://docs.google.com/gview?url=YOUR_SITE_URL/report.docx&embedded=true')"><i class="fas fa-file-word icon"></i>View Word</button></li>
-        </ul>
+        <ul id="documentList" class="document-list"></ul>
 
         <!-- Preview Container -->
         <div class="preview-container">
@@ -97,11 +93,54 @@
     </div>
 
     <script>
-        function showPreview(file) {
-            var iframe = document.getElementById('docPreview');
-            iframe.src = file;
-            iframe.style.display = 'block';
+        // List of documents (Add more if needed)
+        const documents = [
+            { name: "PDF Document 1", url: "document1.pdf", type: "pdf" },
+            { name: "PDF Document 2", url: "document2.pdf", type: "pdf" },
+            { name: "PowerPoint Presentation 1", url: "presentation1.pptx", type: "ppt" },
+            { name: "PowerPoint Presentation 2", url: "presentation2.pptx", type: "ppt" },
+            { name: "Word Report 1", url: "report1.docx", type: "doc" },
+            { name: "Word Report 2", url: "report2.docx", type: "doc" }
+        ];
+
+        // Function to generate document list dynamically
+        function loadDocuments() {
+            const documentList = document.getElementById("documentList");
+
+            documents.forEach(doc => {
+                const listItem = document.createElement("li");
+                const button = document.createElement("button");
+                button.innerHTML = `<i class="fas ${getIcon(doc.type)} icon"></i> ${doc.name}`;
+                button.onclick = () => showPreview(doc.url, doc.type);
+                listItem.appendChild(button);
+                documentList.appendChild(listItem);
+            });
         }
+
+        // Function to show preview in iframe
+        function showPreview(file, type) {
+            let previewURL = file;
+            if (type === "ppt" || type === "doc") {
+                previewURL = `https://docs.google.com/gview?url=YOUR_SITE_URL/${file}&embedded=true`;
+            }
+
+            const iframe = document.getElementById("docPreview");
+            iframe.src = previewURL;
+            iframe.style.display = "block";
+        }
+
+        // Function to get file icon based on type
+        function getIcon(type) {
+            switch (type) {
+                case "pdf": return "fa-file-pdf";
+                case "ppt": return "fa-file-powerpoint";
+                case "doc": return "fa-file-word";
+                default: return "fa-file";
+            }
+        }
+
+        // Load documents when page loads
+        loadDocuments();
     </script>
 
 </body>
