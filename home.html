@@ -3,21 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Documents</title>
+    <title>My Documents - Download</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        ul { list-style-type: none; padding: 0; }
-        li { margin: 10px 0; }
-        a { text-decoration: none; color: blue; font-size: 18px; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 15px 0;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #fff;
+            background: #007bff;
+            padding: 12px 18px;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background 0.3s;
+            width: 100%;
+            max-width: 300px;
+            margin: auto;
+        }
+
+        a:hover {
+            background: #0056b3;
+        }
+
+        .icon {
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
-    <h1>My Documents</h1>
-    <p>Click on a document to download:(KUSUM YADAV)</p>
-    <ul>
-        <li><a href="document1.pdf" download>Download PDF File</a></li>
-        <li><a href="presentation.pptx" download>Download PowerPoint File</a></li>
-        <li><a href="report.docx" download>Download Word File</a></li>
-    </ul>
+
+    <div class="container">
+        <h1>My Documents</h1>
+        <p>Click on a document to download: <strong>Kusum Yadav</strong></p>
+        <ul>
+            <li><a href="document1.pdf" download><i class="fas fa-file-pdf icon"></i>Download PDF File</a></li>
+            <li><a href="presentation.pptx" download><i class="fas fa-file-powerpoint icon"></i>Download PowerPoint File</a></li>
+            <li><a href="report.docx" download><i class="fas fa-file-word icon"></i>Download Word File</a></li>
+        </ul>
+    </div>
+
 </body>
 </html>
