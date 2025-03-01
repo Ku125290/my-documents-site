@@ -24,8 +24,8 @@
 
     <script>
         const pptDocuments = [
-            { name: "PowerPoint Document 1", url: ".docs/Global_warming_in_india_and_water_availability[1].pptx", imgSrc: "images/ppt-icon.png", description: "An introduction to our company's vision and strategy." },
             { name: "PowerPoint Document 1", url: "docs/Global_warming_in_india_and_water_availability[1].pptx", imgSrc: "images/ppt-icon.png", description: "An introduction to our company's vision and strategy." },
+            { name: "PowerPoint Document 1", url: "https://docs.google.com/presentation/d/1kZzxYRQk8zf3jHlPZRPCC4mx7NEAlGmO/edit?usp=sharing&ouid=103298623976178701072&rtpof=true&sd=true", imgSrc: "images/ppt-icon.png", description: "An introduction to our company's vision and strategy." },
         ];
 
         const pptList = document.getElementById("pptList");
@@ -45,13 +45,21 @@
         });
 
         // Preview functionality (opens the document in a new tab)
-        pptList.addEventListener("click", (e) => {
-            if (e.target && e.target.classList.contains("preview-btn")) {
-                const documentUrl = e.target.getAttribute("data-url");
-                const googleDocsViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(documentUrl)}`;
-                window.open(googleDocsViewerUrl, "_blank");
-            }
-        });
+    pptList.addEventListener("click", (e) => {
+        if (e.target && e.target.classList.contains("preview-btn")) {
+            const documentUrl = e.target.getAttribute("data-url");
+
+            // Using Google Docs Viewer for files that are publicly accessible
+            const googleDocsViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(documentUrl)}`;
+            // Alternatively, using Microsoft Office Online Viewer
+            const officeOnlineViewerUrl = `https://view.officeapps.live.com/op/view.aspx?src=${encodeURIComponent(documentUrl)}`;
+
+            // Open preview in a new tab
+            window.open(googleDocsViewerUrl, "_blank");
+            // or
+            // window.open(officeOnlineViewerUrl, "_blank");
+        }
+    });
     </script>
 
 </body>
