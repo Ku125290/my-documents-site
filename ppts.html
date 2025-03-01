@@ -48,7 +48,8 @@
         pptList.addEventListener("click", (e) => {
             if (e.target && e.target.classList.contains("preview-btn")) {
                 const documentUrl = e.target.getAttribute("data-url");
-                window.open(documentUrl, "_blank");
+                const googleDocsViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(documentUrl)}`;
+                window.open(googleDocsViewerUrl, "_blank");
             }
         });
     </script>
