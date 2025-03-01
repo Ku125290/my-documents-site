@@ -8,6 +8,7 @@ nav {
     background-color: #333;
     padding: 10px;
     text-align: center;
+    position: relative;
 }
 
 nav a {
@@ -18,6 +19,30 @@ nav a {
 
 nav a:hover {
     background-color: #575757;
+}
+
+/* Scroll text in the navbar */
+.navbar-marquee {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.navbar-marquee span {
+    display: inline-block;
+    white-space: nowrap;
+    animation: scroll-text 10s linear infinite;
+}
+
+@keyframes scroll-text {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
 .container {
@@ -55,15 +80,21 @@ nav a:hover {
     margin-bottom: 10px;
 }
 
+/* Button container for aligning buttons side by side */
+.button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
 button, .download-btn {
     background-color: #4CAF50;
     color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
-    margin-top: 10px;
     text-align: center;
-    width: 100%;
 }
 
 button:hover, .download-btn:hover {
@@ -72,8 +103,18 @@ button:hover, .download-btn:hover {
 
 .preview-btn {
     background-color: #2196F3;
+    flex: 1;
 }
 
 .preview-btn:hover {
     background-color: #0b7dda;
+}
+
+.download-btn {
+    background-color: #FF5722;
+    flex: 1;
+}
+
+.download-btn:hover {
+    background-color: #e64a19;
 }
