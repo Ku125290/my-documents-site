@@ -16,24 +16,67 @@
     </nav>
 
     <div class="container">
-        <h1>PowerPoint Presentations</h1>
-        <ul id="pptList" class="document-list">
-            <!-- PowerPoint Presentations will be dynamically loaded here -->
-        </ul>
+        <h1>PowerPoint Documents</h1>
+        <div id="pptList" class="document-list">
+            <!-- PowerPoint Documents will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <!-- Modal for Preview -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Document Preview</h2>
+            <embed id="modalContent" src="" width="100%" height="400px">
+            <br>
+            <button id="downloadBtn" class="download-btn">Download Document</button>
+        </div>
     </div>
 
     <script>
         const pptDocuments = [
-            { name: "Presentation 1", url: "docs/presentation1.pptx" },
-            { name: "Presentation 2", url: "docs/presentation2.pptx" }
+            { name: "PowerPoint Document 1", url: "docs/presentation1.pptx", imgSrc: "images/ppt-icon.png" },
+            { name: "PowerPoint Document 2", url: "docs/presentation2.pptx", imgSrc: "images/ppt-icon.png" }
         ];
 
         const pptList = document.getElementById("pptList");
+        const previewModal = document.getElementById("previewModal");
+        const modalContent = document.getElementById("modalContent");
+        const closeModal = document.querySelector(".close");
+        const downloadBtn = document.getElementById("downloadBtn");
+
+        // Dynamically load PowerPoint documents
         pptDocuments.forEach(doc => {
-            const listItem = document.createElement("li");
-            listItem.innerHTML = `<a href="${doc.url}" download>${doc.name}</a>`;
-            pptList.appendChild(listItem);
+            const docBox = document.createElement("div");
+            docBox.classList.add("doc-box");
+            docBox.innerHTML = `
+                <img src="${doc.imgSrc}" alt="${doc.name}" class="doc-image" data-url="${doc.url}">
+                <p>${doc.name}</p>
+            `;
+            pptList.appendChild(docBox);
         });
+
+        // Open Modal for Preview
+        pptList.addEventListener("click", (e) => {
+            if (e.target && e.target.classList.contains("doc-image")) {
+                const documentUrl = e.target.getAttribute("data-url");
+                modalContent.src = documentUrl;
+                previewModal.style.display = "block";
+                downloadBtn.setAttribute("href", documentUrl);
+                downloadBtn.setAttribute("download", e.target.alt);
+            }
+        });
+
+        // Close Modal
+        closeModal.onclick = () => {
+            previewModal.style.display = "none";
+        };
+
+        window.onclick = (event) => {
+            if (event.target === previewModal) {
+                previewModal.style.display = "none";
+            }
+        };
     </script>
 
 </body>
