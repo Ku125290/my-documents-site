@@ -6,7 +6,7 @@ body {
 
 nav {
     background-color: #333;
-    padding: 10px;
+    padding: 20px 10px; /* Adjusting the padding to move the navbar slightly down */
     text-align: center;
     position: relative;
 }
@@ -24,7 +24,7 @@ nav a:hover {
 /* Scroll text in the navbar */
 .navbar-marquee {
     position: absolute;
-    bottom: 0;
+    top: 0; /* Position it at the top of the navbar */
     left: 0;
     width: 100%;
     overflow: hidden;
@@ -33,15 +33,15 @@ nav a:hover {
 .navbar-marquee span {
     display: inline-block;
     white-space: nowrap;
-    animation: scroll-text 10s linear infinite;
+    animation: scroll-text-up 10s linear infinite;
 }
 
-@keyframes scroll-text {
+@keyframes scroll-text-up {
     0% {
-        transform: translateX(100%);
+        transform: translateY(100%);
     }
     100% {
-        transform: translateX(-100%);
+        transform: translateY(-100%);
     }
 }
 
