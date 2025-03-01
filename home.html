@@ -38,6 +38,9 @@
 
         .document-list li {
             margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         button {
@@ -54,8 +57,7 @@
             cursor: pointer;
             transition: background 0.3s;
             width: 100%;
-            max-width: 300px;
-            margin: auto;
+            max-width: 250px;
         }
 
         button:hover {
@@ -64,6 +66,17 @@
 
         .icon {
             margin-right: 10px;
+        }
+
+        .download-link {
+            text-decoration: none;
+            color: #28a745;
+            font-size: 18px;
+            margin-left: 15px;
+        }
+
+        .download-link:hover {
+            color: #218838;
         }
 
         .preview-container {
@@ -93,14 +106,14 @@
     </div>
 
     <script>
-        // List of documents (Add more if needed)
+        // List of documents stored in the "docs" folder
         const documents = [
-            { name: "PDF Document 1", url: "document1.pdf", type: "pdf" },
-            { name: "PDF Document 2", url: "document2.pdf", type: "pdf" },
-            { name: "PowerPoint Presentation 1", url: "presentation1.pptx", type: "ppt" },
-            { name: "PowerPoint Presentation 2", url: "presentation2.pptx", type: "ppt" },
-            { name: "Word Report 1", url: "report1.docx", type: "doc" },
-            { name: "Word Report 2", url: "report2.docx", type: "doc" }
+            { name: "PDF Document 1", url: "docs/document1.pdf", type: "pdf" },
+            { name: "PDF Document 2", url: "docs/document2.pdf", type: "pdf" },
+            { name: "PowerPoint Presentation 1", url: "docs/presentation1.pptx", type: "ppt" },
+            { name: "PowerPoint Presentation 2", url: "docs/presentation2.pptx", type: "ppt" },
+            { name: "Word Report 1", url: "docs/report1.docx", type: "doc" },
+            { name: "Word Report 2", url: "docs/report2.docx", type: "doc" }
         ];
 
         // Function to generate document list dynamically
@@ -109,10 +122,20 @@
 
             documents.forEach(doc => {
                 const listItem = document.createElement("li");
+                
                 const button = document.createElement("button");
                 button.innerHTML = `<i class="fas ${getIcon(doc.type)} icon"></i> ${doc.name}`;
                 button.onclick = () => showPreview(doc.url, doc.type);
+
+                const downloadLink = document.createElement("a");
+                downloadLink.href = doc.url;
+                downloadLink.download = doc.name;
+                downloadLink.innerHTML = `<i class="fas fa-download"></i>`;
+                downloadLink.classList.add("download-link");
+                downloadLink.title = "Download";
+
                 listItem.appendChild(button);
+                listItem.appendChild(downloadLink);
                 documentList.appendChild(listItem);
             });
         }
@@ -121,7 +144,7 @@
         function showPreview(file, type) {
             let previewURL = file;
             if (type === "ppt" || type === "doc") {
-                previewURL = `https://docs.google.com/gview?url=YOUR_SITE_URL/${file}&embedded=true`;
+                previewURL = `https://docs.google.com/gview?url=${window.location.origin}/${file}&embedded=true`;
             }
 
             const iframe = document.getElementById("docPreview");
