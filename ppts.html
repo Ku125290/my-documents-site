@@ -22,14 +22,23 @@
         </div>
     </div>
 
-    <script>
-        const pptDocuments = [
-            { name: "PowerPoint Document 1", url: "docs/Global_warming_in_india_and_water_availability[1].pptx", imgSrc: "images/ppt-icon.png", description: "An introduction to our company's vision and strategy." },
-            { name: "PowerPoint Document 1", url: "https://docs.google.com/presentation/d/1kZzxYRQk8zf3jHlPZRPCC4mx7NEAlGmO/edit?usp=sharing&ouid=103298623976178701072&rtpof=true&sd=true", imgSrc: "images/ppt-icon.png", description: "An introduction to our company's vision and strategy." },
-                    { name: "PowerPoint Document 1", url: "https://docs.google.com/presentation/d/1kZzxYRQk8zf3jHlPZRPCC4mx7NEAlGmO/embed", imgSrc: "images/ppt-icon.png", description: "An introduction to our company's vision and strategy." },
-        { name: "PowerPoint Document 2", url: "https://docs.google.com/presentation/d/1kZzxYRQk8zf3jHlPZRPCC4mx7NEAlGmO/embed", imgSrc: "images/ppt-icon.png", description: "Detailed overview of the recent advancements in technology." }
-
-        ];
+<script>
+    const pptDocuments = [
+        { 
+            name: "PowerPoint Document 1", 
+            previewUrl: "https://docs.google.com/presentation/d/1kZzxYRQk8zf3jHlPZRPCC4mx7NEAlGmO/embed", 
+            downloadUrl: "docs/Global_warming_in_india_and_water_availability[1].pptx", 
+            imgSrc: "images/ppt-icon.png", 
+            description: "An introduction to global warming and water availability." 
+        },
+        { 
+            name: "PowerPoint Document 2", 
+            previewUrl: "https://docs.google.com/presentation/d/1kZzxYRQk8zf3jHlPZRPCC4mx7NEAlGmO/embed", 
+            downloadUrl: "docs/presentation2.pptx", 
+            imgSrc: "images/ppt-icon.png", 
+            description: "Detailed overview of water scarcity solutions." 
+        }
+    ];
 
     const pptList = document.getElementById("pptList");
 
@@ -41,8 +50,8 @@
             <img src="${doc.imgSrc}" alt="${doc.name}" class="doc-image">
             <p>${doc.name}</p>
             <p class="doc-description">${doc.description}</p>
-            <button class="preview-btn" data-url="${doc.url}">Preview</button>
-            <a href="${doc.url}" class="download-btn" download="${doc.name}">Download</a>
+            <button class="preview-btn" data-url="${doc.previewUrl}">Preview</button>
+            <a href="${doc.downloadUrl}" class="download-btn" download="${doc.name}">Download</a>
         `;
         pptList.appendChild(docBox);
     });
@@ -56,7 +65,7 @@
             window.open(documentUrl, "_blank");
         }
     });
-    </script>
+</script>
 
 </body>
 </html>
