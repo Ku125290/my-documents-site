@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerPoint Presentations</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="pdfs.html">PDF Documents</a>
+        <a href="docs.html">Word Documents</a>
+    </nav>
+
+    <div class="container">
+        <h1>PowerPoint Presentations</h1>
+        <ul id="pptList" class="document-list">
+            <!-- PowerPoint Presentations will be dynamically loaded here -->
+        </ul>
+    </div>
+
+    <script>
+        const pptDocuments = [
+            { name: "Presentation 1", url: "docs/presentation1.pptx" },
+            { name: "Presentation 2", url: "docs/presentation2.pptx" }
+        ];
+
+        const pptList = document.getElementById("pptList");
+        pptDocuments.forEach(doc => {
+            const listItem = document.createElement("li");
+            listItem.innerHTML = `<a href="${doc.url}" download>${doc.name}</a>`;
+            pptList.appendChild(listItem);
+        });
+    </script>
+
+</body>
+</html>
