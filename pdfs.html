@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Documents</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="ppts.html">PowerPoint Presentations</a>
+        <a href="docs.html">Word Documents</a>
+    </nav>
+
+    <div class="container">
+        <h1>PDF Documents</h1>
+        <ul id="pdfList" class="document-list">
+            <!-- PDF Documents will be dynamically loaded here -->
+        </ul>
+    </div>
+
+    <script>
+        const pdfDocuments = [
+            { name: "PDF Document 1", url: "docs/document1.pdf" },
+            { name: "PDF Document 2", url: "docs/document2.pdf" }
+        ];
+
+        const pdfList = document.getElementById("pdfList");
+        pdfDocuments.forEach(doc => {
+            const listItem = document.createElement("li");
+            listItem.innerHTML = `<a href="${doc.url}" download>${doc.name}</a>`;
+            pdfList.appendChild(listItem);
+        });
+    </script>
+
+</body>
+</html>
