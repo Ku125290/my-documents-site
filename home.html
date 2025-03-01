@@ -9,13 +9,31 @@
         body {
             font-family: Arial, sans-serif;
             background: #f4f4f4;
-            text-align: center;
             padding: 20px;
         }
 
+        /* Navbar styles */
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
         .container {
-            max-width: 800px;
-            margin: 0 auto;
+            margin-top: 20px;
             background: #fff;
             padding: 20px;
             border-radius: 10px;
@@ -24,11 +42,11 @@
 
         h1 {
             color: #333;
+            text-align: center;
         }
 
-        p {
-            font-size: 18px;
-            color: #666;
+        .document-section {
+            margin-top: 20px;
         }
 
         .document-list {
@@ -94,10 +112,34 @@
 </head>
 <body>
 
+    <!-- Navbar -->
+    <nav>
+        <a href="#pdfSection">PDFs</a>
+        <a href="#pptSection">PPTs</a>
+        <a href="#docSection">Word Docs</a>
+    </nav>
+
     <div class="container">
         <h1>Document Viewer</h1>
-        <p>Click on a document to preview or download: <strong>Kusum Yadav</strong></p>
-        <ul id="documentList" class="document-list"></ul>
+        <p>Click on a document to preview or download:</p>
+
+        <!-- PDF Section -->
+        <div id="pdfSection" class="document-section">
+            <h2>PDF Documents</h2>
+            <ul id="pdfList" class="document-list"></ul>
+        </div>
+
+        <!-- PowerPoint Section -->
+        <div id="pptSection" class="document-section">
+            <h2>PowerPoint Presentations</h2>
+            <ul id="pptList" class="document-list"></ul>
+        </div>
+
+        <!-- Word Document Section -->
+        <div id="docSection" class="document-section">
+            <h2>Word Documents</h2>
+            <ul id="docList" class="document-list"></ul>
+        </div>
 
         <!-- Preview Container -->
         <div class="preview-container">
@@ -106,38 +148,61 @@
     </div>
 
     <script>
-        // List of documents stored in the "docs" folder
-        const documents = [
-            { name: "PDF Document 1", url: "docs/document1.pdf", type: "pdf" },
-            { name: "PDF Document 2", url: "docs/document2.pdf", type: "pdf" },
-            { name: "PowerPoint Presentation 1", url: "docs//Global_warming_in_india_and_water_availability[1].pptx", type: "ppt" },
-            { name: "PowerPoint Presentation 2", url: "docs/presentation2.pptx", type: "ppt" },
-            { name: "Word Report 1", url: "docs/report1.docx", type: "doc" },
-            { name: "Word Report 2", url: "docs/report2.docx", type: "doc" }
-        ];
+        // List of documents categorized by type
+        const documents = {
+            pdf: [
+                { name: "PDF Document 1", url: "docs/document1.pdf" },
+                { name: "PDF Document 2", url: "docs/document2.pdf" }
+            ],
+            ppt: [
+                { name: "PowerPoint Presentation 1", url: "docs/presentation1.pptx" },
+                { name: "PowerPoint Presentation 2", url: "docs/presentation2.pptx" }
+            ],
+            doc: [
+                { name: "Word Report 1", url: "docs/report1.docx" },
+                { name: "Word Report 2", url: "docs/report2.docx" }
+            ]
+        };
 
-        // Function to generate document list dynamically
+        // Function to generate document list dynamically for each category
         function loadDocuments() {
-            const documentList = document.getElementById("documentList");
-
-            documents.forEach(doc => {
-                const listItem = document.createElement("li");
-                
-                const button = document.createElement("button");
-                button.innerHTML = `<i class="fas ${getIcon(doc.type)} icon"></i> ${doc.name}`;
-                button.onclick = () => showPreview(doc.url, doc.type);
-
-                const downloadLink = document.createElement("a");
-                downloadLink.href = doc.url;
-                downloadLink.download = doc.name;
-                downloadLink.innerHTML = `<i class="fas fa-download"></i>`;
-                downloadLink.classList.add("download-link");
-                downloadLink.title = "Download";
-
-                listItem.appendChild(button);
-                listItem.appendChild(downloadLink);
-                documentList.appendChild(listItem);
+            // Load PDF documents
+            const pdfList = document.getElementById("pdfList");
+            documents.pdf.forEach(doc => {
+                createDocumentItem(pdfList, doc, 'pdf');
             });
+
+            // Load PPT documents
+            const pptList = document.getElementById("pptList");
+            documents.ppt.forEach(doc => {
+                createDocumentItem(pptList, doc, 'ppt');
+            });
+
+            // Load Word documents
+            const docList = document.getElementById("docList");
+            documents.doc.forEach(doc => {
+                createDocumentItem(docList, doc, 'doc');
+            });
+        }
+
+        // Function to create individual document list item
+        function createDocumentItem(list, doc, type) {
+            const listItem = document.createElement("li");
+
+            const button = document.createElement("button");
+            button.innerHTML = `<i class="fas ${getIcon(type)} icon"></i> ${doc.name}`;
+            button.onclick = () => showPreview(doc.url, type);
+
+            const downloadLink = document.createElement("a");
+            downloadLink.href = doc.url;
+            downloadLink.download = doc.name;
+            downloadLink.innerHTML = `<i class="fas fa-download"></i>`;
+            downloadLink.classList.add("download-link");
+            downloadLink.title = "Download";
+
+            listItem.appendChild(button);
+            listItem.appendChild(downloadLink);
+            list.appendChild(listItem);
         }
 
         // Function to show preview in iframe
@@ -163,7 +228,7 @@
         }
 
         // Load documents when page loads
-        loadDocuments();
+        window.onload = loadDocuments;
     </script>
 
 </body>
