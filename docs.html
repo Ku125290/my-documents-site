@@ -23,61 +23,49 @@
         </div>
     </div>
 
-    <!-- Modal for Preview -->
-    <div id="previewModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Document Preview</h2>
-            <embed id="modalContent" src="" width="100%" height="400px">
-            <br>
-            <button id="downloadBtn" class="download-btn">Download Document</button>
-        </div>
-    </div>
-
     <script>
         const wordDocuments = [
-            { name: "Word Document 1", url: "docs/document1.docx", imgSrc: "images/word-icon.png" },
-            { name: "Word Document 2", url: "docs/document2.docx", imgSrc: "images/word-icon.png" }
+            { 
+                name: "Word Document 1", 
+                previewUrl: "docs/document1.docx", 
+                downloadUrl: "docs/document1.docx", 
+                imgSrc: "images/word-icon.png", 
+                description: "This is the description for Word Document 1." 
+            },
+            { 
+                name: "Word Document 2", 
+                previewUrl: "docs/document2.docx", 
+                downloadUrl: "docs/document2.docx", 
+                imgSrc: "images/word-icon.png", 
+                description: "An overview of important topics covered in Word Document 2." 
+            }
         ];
 
         const docList = document.getElementById("docList");
-        const previewModal = document.getElementById("previewModal");
-        const modalContent = document.getElementById("modalContent");
-        const closeModal = document.querySelector(".close");
-        const downloadBtn = document.getElementById("downloadBtn");
 
         // Dynamically load Word documents
         wordDocuments.forEach(doc => {
             const docBox = document.createElement("div");
             docBox.classList.add("doc-box");
             docBox.innerHTML = `
-                <img src="${doc.imgSrc}" alt="${doc.name}" class="doc-image" data-url="${doc.url}">
+                <img src="${doc.imgSrc}" alt="${doc.name}" class="doc-image">
                 <p>${doc.name}</p>
+                <p class="doc-description">${doc.description}</p>
+                <button class="preview-btn" data-url="${doc.previewUrl}">Preview</button>
+                <a href="${doc.downloadUrl}" class="download-btn" download="${doc.name}">Download</a>
             `;
             docList.appendChild(docBox);
         });
 
-        // Open Modal for Preview
+        // Preview functionality (opens the document in a new tab)
         docList.addEventListener("click", (e) => {
-            if (e.target && e.target.classList.contains("doc-image")) {
+            if (e.target && e.target.classList.contains("preview-btn")) {
                 const documentUrl = e.target.getAttribute("data-url");
-                modalContent.src = documentUrl;
-                previewModal.style.display = "block";
-                downloadBtn.setAttribute("href", documentUrl);
-                downloadBtn.setAttribute("download", e.target.alt);
+
+                // Open preview in a new tab (Word document)
+                window.open(documentUrl, "_blank");
             }
         });
-
-        // Close Modal
-        closeModal.onclick = () => {
-            previewModal.style.display = "none";
-        };
-
-        window.onclick = (event) => {
-            if (event.target === previewModal) {
-                previewModal.style.display = "none";
-            }
-        };
     </script>
 
 </body>
