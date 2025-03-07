@@ -52,7 +52,8 @@ nav a:hover {
 .document-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 17px;
+    justify-content: center;
 }
 
 .doc-box {
